@@ -1,5 +1,6 @@
 package com.e.tostarttimer
 
+import android.animation.TimeInterpolator
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.ikovac.timepickerwithseconds.MyTimePickerDialog
 import com.ikovac.timepickerwithseconds.TimePicker
+
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDate
 import java.util.*
@@ -26,44 +28,10 @@ class MainActivity : AppCompatActivity() {
     var sumOfTime: Int = 0
     var timerTask: Timer? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setTimer()
-//
-//        val timePicker = MyTimePickerDialog(
-//            this,
-//            MyTimePickerDialog.OnTimeSetListener() { timePicker: TimePicker, hoursOfDay: Int, minute: Int, seconds: Int ->
-//
-////                timeText.setText(
-////                    String.format("%02d", hoursOfDay) +
-////                            ":" + String.format("%02d", minute) +
-////                            ":" + String.format("%02d", seconds)
-////                )
-//                sumOfTime = hoursOfDay * 60 * 60 + minute * 60 + seconds
-//                var Timer = object : CountDownTimer(sumOfTime!!.toLong(), 100) {
-//                    override fun onTick(millisUntilFinished: Long) {
-//                        timeText.setText("${millisUntilFinished} 남았습니다")
-//                    }
-//
-//                    override fun onFinish() {
-//                        Toast.makeText(this@MainActivity, "CountDown Finished.", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
-//                }
-//                Timer.start()
-//                startTimer()
-//            },
-//            Calendar.HOUR_OF_DAY,
-//            Calendar.MINUTE,
-//            Calendar.SECOND,
-//            true
-//        )
-
-//        timePicker.show()
-
     }
 
     fun setTimer() {
@@ -84,23 +52,17 @@ class MainActivity : AppCompatActivity() {
 
     fun startTimer() {
 
-//        var Timer = object : CountDownTimer(sumOfTime.toLong(), 1000) {
-//            override fun onTick(millisUntilFinished: Long) {
-//                timeText.setText("${millisUntilFinished/1000} 남았습니다")
-//            }
-//
-//            override fun onFinish() {
-//                Toast.makeText(this@MainActivity, "CountDown Finished.", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//        }
-//        Timer.start()
+
         var countDownTime = sumOfTime
+        var percentage: Float = 100.0f
         timerTask = timer(period = 1000) {
 
             countDownTime--
 
-            runOnUiThread { timeText.setText("$countDownTime") }
+            runOnUiThread {
+//                timeText.setText("$countDownTime")
+                timeProgressBar.setProgress()
+            }
         }
     }
 
@@ -114,3 +76,5 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
