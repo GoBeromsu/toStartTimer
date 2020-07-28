@@ -1,21 +1,15 @@
 package com.e.tostarttimer
 
-import android.animation.TimeInterpolator
-import android.content.Context
-import android.graphics.Color
-import android.os.Build
+
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.ikovac.timepickerwithseconds.MyTimePickerDialog
 import com.ikovac.timepickerwithseconds.TimePicker
-
+import com.uzairiqbal.circulartimerview.CircularTimerListener
+import com.uzairiqbal.circulartimerview.TimeFormatEnum
 import kotlinx.android.synthetic.main.activity_main.*
-import java.time.LocalDate
 import java.util.*
-import kotlin.concurrent.timer
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,29 +23,35 @@ class MainActivity : AppCompatActivity() {
     var sumOfTime: Int = 0
     var timerTask: Timer? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setTimer()
 
-        timeProgressBar.apply {
-            progressMax = 100f
-            setProgressWithAnimation(sumOfTime.toFloat(), 1000)
-            progressBarWidth = 5f
-            backgroundProgressBarWidth = 7f
-            progressBarColor = Color.BLUE
-            progressMax = 100f
-        }
+        setTimePicker()
+        progressBar.setCircularTimerListener(object : CircularTimerListener {
+            override fun updateDataOnTick(remainingTimeInMs: Long): String {
+                return Math.ceil((remainingTimeInMs / 1000f).toDouble()).toString()
+            }
+
+            override fun onTimerFinished() {
+                Toast.makeText(this@MainActivity, "FINISHED", Toast.LENGTH_SHORT).show();
+                progressBar.setPrefix("");
+                progressBar.setSuffix("");
+                progressBar.setText("FINISHED THANKS!");
+            }
+
+        }, 10, TimeFormatEnum.SECONDS, 10);
 
     }
 
-    fun setTimer() {
+    fun setTimePicker() {
         val timePicker = MyTimePickerDialog(
             this,
             MyTimePickerDialog.OnTimeSetListener() { timePicker: TimePicker, hoursOfDay: Int, minute: Int, seconds: Int ->
                 sumOfTime = hoursOfDay * 60 * 60 + minute * 60 + seconds
-                storeTime(sumOfTime)
-                startTimer()
+//                storeTime(sumOfTime)
+//                startTimer()
             },
             Calendar.HOUR_OF_DAY,
             Calendar.MINUTE,
@@ -61,31 +61,34 @@ class MainActivity : AppCompatActivity() {
         timePicker.show()
     }
 
-    fun startTimer() {
 
-
-        var countDownTime = sumOfTime
-        var percentage: Float = 100.0f
-        timerTask = timer(period = 1000) {
-
-            countDownTime--
-
-            runOnUiThread {
-//                timeText.setText("$countDownTime")
-
-            }
-        }
-    }
-
-
-    fun storeTime(Time: Int): Int {
-        sumOfTime = Time
-        Toast.makeText(this@MainActivity, "${sumOfTime}은 storeTime에서 호출됨", Toast.LENGTH_SHORT)
-            .show()
-        return sumOfTime
-    }
+    //
+//    fun startTimer() {
+//
+//
+//        var countDownTime = sumOfTime
+//        var percentage: Float = 100.0f
+//        timerTask = timer(period = 1000) {
+//
+//            countDownTime--
+//
+//            runOnUiThread {
+////                timeText.setText("$countDownTime")
+//
+//            }
+//        }
+//    }
+//
+//
+//    fun storeTime(Time: Int): Int {
+//        sumOfTime = Time
+//        Toast.makeText(this@MainActivity, "${sumOfTime}은 storeTime에서 호출됨", Toast.LENGTH_SHORT)
+//            .show()
+//        return sumOfTime
+//    }
 
 
 }
+
 
 

@@ -15,23 +15,26 @@
     <!--        app:layout_constraintLeft_toLeftOf="parent"-->
     <!--        app:layout_constraintRight_toRightOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-        android:id="@+id/timeProgressBar"
+    <com.uzairiqbal.circulartimerview.CircularTimerView
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        app:cpb_background_progressbar_color="#b6bbd8"
-        app:cpb_background_progressbar_width="5dp"
-        app:cpb_progress_direction="to_right"
-        app:cpb_progressbar_color="#3f51b5"
-        app:cpb_progressbar_width="10dp"
-        app:cpb_round_border="false"
+        app:backgroundColor="#e76130"
+        app:backgroundWidth="8"
+        app:isClockwise="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:maxValue="100"
+        app:prefix="Time Left "
+        app:progressBackgroundColor="#eee"
+        app:progressColor="#000"
+        app:progressText="Time Remaining..."
+        app:progressTextColor="#eee"
+        app:startingPoint="bottom"
+        app:suffix=" sec"
+        app:textSize="18sp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
