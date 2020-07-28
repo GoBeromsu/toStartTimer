@@ -2,6 +2,7 @@ package com.e.tostarttimer
 
 import android.animation.TimeInterpolator
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -32,6 +33,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setTimer()
+
+        timeProgressBar.apply {
+            progressMax = 100f
+            setProgressWithAnimation(sumOfTime.toFloat(), 1000)
+            progressBarWidth = 5f
+            backgroundProgressBarWidth = 7f
+            progressBarColor = Color.BLUE
+            progressMax = 100f
+        }
+
     }
 
     fun setTimer() {
@@ -61,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
             runOnUiThread {
 //                timeText.setText("$countDownTime")
-                timeProgressBar.setProgress()
+
             }
         }
     }
