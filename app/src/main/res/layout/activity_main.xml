@@ -15,26 +15,50 @@
     <!--        app:layout_constraintLeft_toLeftOf="parent"-->
     <!--        app:layout_constraintRight_toRightOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
-    <com.uzairiqbal.circulartimerview.CircularTimerView
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundColor="#e76130"
-        app:backgroundWidth="8"
-        app:isClockwise="true"
+<!--    <com.uzairiqbal.circulartimerview.CircularTimerView-->
+<!--        android:id="@+id/progressBar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:backgroundColor="#e76130"-->
+<!--        app:backgroundWidth="8"-->
+<!--        app:isClockwise="true"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:maxValue="100"-->
+<!--        app:prefix="Time Left "-->
+<!--        app:progressBackgroundColor="#eee"-->
+<!--        app:progressColor="#000"-->
+<!--        app:progressText="Time Remaining..."-->
+<!--        app:progressTextColor="#eee"-->
+<!--        app:startingPoint="bottom"-->
+<!--        app:suffix=" sec"-->
+<!--        app:textSize="18sp" />-->
+    <com.sfyc.ctpv.CountTimeProgressView
+        android:id="@+id/countTimeProgressView"
+        android:layout_width="298dp"
+        android:layout_height="313dp"
+        android:layout_alignParentRight="true"
+        app:backgroundColorCenter="#CDC8EA"
+        app:borderBottomColor="#D60000"
+        app:borderDrawColor="#CDC8EA"
+        app:borderWidth="3dp"
+        app:clockwise="true"
+        app:countTime="5000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:maxValue="100"
-        app:prefix="Time Left "
-        app:progressBackgroundColor="#eee"
-        app:progressColor="#000"
-        app:progressText="Time Remaining..."
-        app:progressTextColor="#eee"
-        app:startingPoint="bottom"
-        app:suffix=" sec"
-        app:textSize="18sp" />
-
+        app:layout_constraintVertical_bias="1.0"
+        app:markBallColor="#002FFF"
+        app:markBallFlag="true"
+        app:markBallWidth="3dp"
+        app:startAngle="0"
+        app:textStyle="jump"
+        app:titleCenterColor="#000000"
+        app:titleCenterSize="14sp"
+        app:titleCenterText="흠" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
