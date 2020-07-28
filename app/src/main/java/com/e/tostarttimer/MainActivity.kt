@@ -27,6 +27,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setProgressBar()
+        setTimePicker()
+
+
+    }
+
+    fun setTimePicker() {
+        val timePicker = MyTimePickerDialog(
+            this,
+            MyTimePickerDialog.OnTimeSetListener() { timePicker: TimePicker, hoursOfDay: Int, minute: Int, seconds: Int ->
+                sumOfTime = hoursOfDay * 60 * 60 + minute * 60 + seconds
+                storeTime(sumOfTime)
+
+                countTimeProgressView.countTime = sumOfTime.toLong() * 1000L
+                countTimeProgressView.startCountTimeAnimation()
+            },
+            Calendar.HOUR_OF_DAY,
+            Calendar.MINUTE,
+            Calendar.SECOND,
+            true
+        )
+
+
+        timePicker.show()
+
+    }
+
+    fun setProgressBar() {
         with(countTimeProgressView) {
             startAngle = 0f
             countTime = 6000L
@@ -38,9 +66,7 @@ class MainActivity : AppCompatActivity() {
             markBallFlag = true
             markBallWidth = 6f
             markBallColor = Color.GREEN
-            titleCenterText = "jump（%s）s"
-            titleCenterTextColor = Color.BLACK
-            titleCenterTextSize = 16f
+
             addOnEndListener(object : CountTimeProgressView.OnEndListener {
                 override fun onAnimationEnd() {
                     Toast.makeText(this@MainActivity, "时间到", Toast.LENGTH_SHORT).show()
@@ -58,34 +84,9 @@ class MainActivity : AppCompatActivity() {
         }
         countTimeProgressView.startCountTimeAnimation()
 
-        setTimePicker()
-
-
     }
+        fun startTimer() {
 
-    fun setTimePicker() {
-        val timePicker = MyTimePickerDialog(
-            this,
-            MyTimePickerDialog.OnTimeSetListener() { timePicker: TimePicker, hoursOfDay: Int, minute: Int, seconds: Int ->
-                sumOfTime = hoursOfDay * 60 * 60 + minute * 60 + seconds
-                storeTime(sumOfTime)
-//                startTimer()
-                countTimeProgressView.countTime = sumOfTime.toLong() * 1000L
-                countTimeProgressView.startCountTimeAnimation()
-            },
-            Calendar.HOUR_OF_DAY,
-            Calendar.MINUTE,
-            Calendar.SECOND,
-            true
-        )
-
-
-        timePicker.show()
-
-    }
-
-
-    fun startTimer() {
 
         var countDownTime = sumOfTime
         var percentage: Float = 100.0f
@@ -99,8 +100,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
     fun storeTime(Time: Int): Int {
         sumOfTime = Time
         Toast.makeText(this@MainActivity, "${sumOfTime}은 storeTime에서 호출됨", Toast.LENGTH_SHORT)
