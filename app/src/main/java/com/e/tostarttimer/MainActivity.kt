@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         setProgressBar()
         setTimePicker()
 
-
     }
 
     fun setTimePicker() {
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 storeTime(sumOfTime)
 
                 countTimeProgressView.countTime = sumOfTime.toLong() * 1000L
+                startTimer(hoursOfDay, minute, seconds)
                 countTimeProgressView.startCountTimeAnimation()
             },
             Calendar.HOUR_OF_DAY,
@@ -58,18 +58,19 @@ class MainActivity : AppCompatActivity() {
         with(countTimeProgressView) {
             startAngle = 0f
             countTime = 6000L
-            textStyle = CountTimeProgressView.TextStyle.SECOND
-            borderWidth = 4f
+            borderWidth = 7f
             borderBottomColor = Color.GRAY
-            borderDrawColor = Color.RED
+            borderDrawColor = Color.BLACK
             backgroundColorCenter = Color.WHITE
             markBallFlag = true
-            markBallWidth = 6f
-            markBallColor = Color.GREEN
-
+            markBallWidth = 9f
+            markBallColor = Color.BLUE
+            titleCenterText = "Let's Use This"
+            titleCenterTextColor = Color.BLUE
+            titleCenterTextSize = 20f
             addOnEndListener(object : CountTimeProgressView.OnEndListener {
                 override fun onAnimationEnd() {
-                    Toast.makeText(this@MainActivity, "时间到", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Time is End", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onClick(overageTime: Long) {
@@ -85,21 +86,54 @@ class MainActivity : AppCompatActivity() {
         countTimeProgressView.startCountTimeAnimation()
 
     }
-        fun startTimer() {
 
+    fun startTimer(hours: Int, minutes: Int, seconds: Int) {
 
-        var countDownTime = sumOfTime
-        var percentage: Float = 100.0f
+        var seconds = seconds
+        var minutes = minutes
+        var hours = hours
+
         timerTask = timer(period = 1000) {
 
-            countDownTime--
+            seconds--
+            if (seconds < 0) {
+                minutes--
+                seconds = 59
+            }
+            if (minutes < 0) {
+                hours--
+                minutes = 59
+            }
+            
+            var timerSeconds = seconds.toString()
+            var timerMinutes = minutes.toString()
+            var timerHours = hours.toString()
 
+
+            if (seconds < 10) {
+                timerSeconds = "0$seconds"
+            }
+            if (minutes < 10) {
+                timerMinutes = "0$minutes"
+            }
+            if (hours < 10) {
+                timerHours = "0$hours"
+            }
             runOnUiThread {
-//                timeText.setText("$countDownTime")
 
+                timeText.setText("$timerHours : $timerMinutes : $timerSeconds")
             }
         }
+
+        btn_reset.setOnClickListener() {
+            timerTask!!.cancel()
+            sumOfTime = 0
+            setTimePicker()
+        }
+
     }
+
+
     fun storeTime(Time: Int): Int {
         sumOfTime = Time
         Toast.makeText(this@MainActivity, "${sumOfTime}은 storeTime에서 호출됨", Toast.LENGTH_SHORT)
