@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity() {
             markBallFlag = true
             markBallWidth = 9f
             markBallColor = Color.BLUE
-            titleCenterText = "Let's Use This"
-            titleCenterTextColor = Color.BLUE
-            titleCenterTextSize = 20f
+            titleCenterText = "Time Is Gold"
+            titleCenterTextColor = Color.BLACK
+            titleCenterTextSize = 80f
             addOnEndListener(object : CountTimeProgressView.OnEndListener {
                 override fun onAnimationEnd() {
                     Toast.makeText(this@MainActivity, "Time is End", Toast.LENGTH_SHORT).show()
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 hours--
                 minutes = 59
             }
-            
+
             var timerSeconds = seconds.toString()
             var timerMinutes = minutes.toString()
             var timerHours = hours.toString()

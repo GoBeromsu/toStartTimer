@@ -21,7 +21,7 @@
         app:markBallFlag="true"
         app:markBallWidth="3dp"
         app:startAngle="0"
-        app:textStyle="none"
+        app:textStyle="jump"
         app:titleCenterColor="#000000"
         app:titleCenterSize="40dp"
         app:titleCenterText="" />
