@@ -149,11 +149,8 @@ class MainActivity : AppCompatActivity() {
             sumOfTime = 0
 
             setTimePicker()
-            if (btn_reset.text != "start")  {
+            btn_reset.setText("Reset")
 
-                btn_reset.setText("Reset")
-                setTimePicker()
-            }
         }
 
     }
