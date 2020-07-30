@@ -67,10 +67,10 @@ class MainActivity : AppCompatActivity() {
             markBallColor = Color.BLUE
             titleCenterText = "Time Is Gold"
             titleCenterTextColor = Color.BLACK
-            titleCenterTextSize = 80f
+            titleCenterTextSize = 50f
             addOnEndListener(object : CountTimeProgressView.OnEndListener {
                 override fun onAnimationEnd() {
-                    Toast.makeText(this@MainActivity, "Time is End", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Count Finished", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onClick(overageTime: Long) {
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         var hours = hours
 
         timerTask = timer(period = 1000) {
-
+            sumOfTime--
             seconds--
             if (seconds < 0) {
                 minutes--
@@ -123,6 +123,10 @@ class MainActivity : AppCompatActivity() {
 
                 timeText.setText("$timerHours : $timerMinutes : $timerSeconds")
             }
+            if (sumOfTime==0){
+                timerTask!!.cancel()
+                timeText.setText("00 : 00 : 00")
+            }
         }
 
         btn_reset.setOnClickListener() {
@@ -134,10 +138,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     fun storeTime(Time: Int): Int {
         sumOfTime = Time
-        Toast.makeText(this@MainActivity, "${sumOfTime}은 storeTime에서 호출됨", Toast.LENGTH_SHORT)
-            .show()
+
         return sumOfTime
     }
 }
