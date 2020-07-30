@@ -43,7 +43,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/buttonshape"
-        android:text="Reset"
+        android:text="Start"
         android:textSize="24dp" />
 
 

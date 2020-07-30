@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setProgressBar()
-        setTimePicker()
+        startTimer()
 
     }
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             markBallFlag = true
             markBallWidth = 9f
             markBallColor = Color.BLUE
-            titleCenterText = "Time Is Gold"
+            titleCenterText = "Time is Gold"
             titleCenterTextColor = Color.BLACK
             titleCenterTextSize = 50f
             addOnEndListener(object : CountTimeProgressView.OnEndListener {
@@ -120,10 +120,12 @@ class MainActivity : AppCompatActivity() {
                 timerHours = "0$hours"
             }
             runOnUiThread {
-
+                if (seconds == 0 && minutes == 0 && hours == 0) {
+                    timeText.setText("00:00:00")
+                }
                 timeText.setText("$timerHours : $timerMinutes : $timerSeconds")
             }
-            if (sumOfTime==0){
+            if (sumOfTime == 0) {
                 timerTask!!.cancel()
                 timeText.setText("00 : 00 : 00")
             }
@@ -132,12 +134,29 @@ class MainActivity : AppCompatActivity() {
         btn_reset.setOnClickListener() {
             timerTask!!.cancel()
             sumOfTime = 0
+
             setTimePicker()
+
+
         }
 
     }
 
+    fun startTimer() {
+        timeText.setText("00 : 00 : 00")
 
+        btn_reset.setOnClickListener() {
+            sumOfTime = 0
+
+            setTimePicker()
+            if (btn_reset.text != "start")  {
+
+                btn_reset.setText("Reset")
+                setTimePicker()
+            }
+        }
+
+    }
 
     fun storeTime(Time: Int): Int {
         sumOfTime = Time
