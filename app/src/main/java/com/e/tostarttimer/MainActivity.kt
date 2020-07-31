@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     var sumOfTime: Int = 0
     var timerTask: Timer? = null
-
+    var wiseSaingArray = arrayOfNulls<String>(100)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
