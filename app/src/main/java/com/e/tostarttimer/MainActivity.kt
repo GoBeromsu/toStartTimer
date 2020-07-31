@@ -2,6 +2,7 @@ package com.e.tostarttimer
 
 
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,15 +18,38 @@ import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
 
-
+    var mediaplayer : MediaPlayer?= null
     var sumOfTime: Int = 0
     var timerTask: Timer? = null
-    var wiseSaingArray = arrayOfNulls<String>(100)
+    val wiseSaingArray: Array<String> = arrayOf(
+        """Nothing is as far away 
+        |as one minute ago.
+        """.trimMargin(),
+        """ Regret for wasted time is 
+        |more wasted time.
+        """.trimMargin(),
+        """So little time and 
+        |so little to do.
+         """.trimMargin(),
+        """Time is an illusion. 
+        |Lunchtime doubly so. """.trimMargin(),
+        """Employ thy time well, 
+        |if thou meanest to get leisure. """.trimMargin(),
+        """Punctuality is the soul of business. 
+        """.trimMargin(),
+        """The future ain't what it used to be. 
+        """.trimMargin(),
+        """Doing a thing well is often a waste of time. 
+        """.trimMargin()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mediaplayer = MediaPlayer.create(this,R.raw.bbibic)
+
 
         setProgressBar()
         startTimer()
@@ -54,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun setProgressBar() {
         with(countTimeProgressView) {
             startAngle = 0f
@@ -67,7 +92,8 @@ class MainActivity : AppCompatActivity() {
             markBallColor = Color.BLUE
             titleCenterText = "Time is Gold"
             titleCenterTextColor = Color.BLACK
-            titleCenterTextSize = 50f
+            titleCenterTextSize = 17f
+
             addOnEndListener(object : CountTimeProgressView.OnEndListener {
                 override fun onAnimationEnd() {
                     Toast.makeText(this@MainActivity, "Count Finished", Toast.LENGTH_SHORT).show()
@@ -134,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         btn_reset.setOnClickListener() {
             timerTask!!.cancel()
             sumOfTime = 0
-
+            countTimeProgressView.titleCenterText = wiseSaingArray[Random().nextInt(6)]
             setTimePicker()
 
 
@@ -147,7 +173,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_reset.setOnClickListener() {
             sumOfTime = 0
-
+            countTimeProgressView.titleCenterText = wiseSaingArray[Random().nextInt(6)]
             setTimePicker()
             btn_reset.setText("Reset")
 
@@ -160,6 +186,7 @@ class MainActivity : AppCompatActivity() {
 
         return sumOfTime
     }
+
 }
 
 

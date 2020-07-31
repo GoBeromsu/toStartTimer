@@ -24,7 +24,8 @@
         app:textStyle="jump"
         app:titleCenterColor="#000000"
         app:titleCenterSize="40dp"
-        app:titleCenterText="" />
+        app:titleCenterText=""
+        />
 
     <TextView
         android:id="@+id/timeText"
@@ -43,7 +44,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/buttonshape"
-        android:text="Start"
+        android:text="Reset"
         android:textSize="24dp" />
 
 
