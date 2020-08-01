@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mediaplayer = MediaPlayer.create(this,R.raw.bbibic)
 
 
         setProgressBar()
@@ -114,7 +113,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startTimer(hours: Int, minutes: Int, seconds: Int) {
-
         var seconds = seconds
         var minutes = minutes
         var hours = hours
@@ -154,6 +152,7 @@ class MainActivity : AppCompatActivity() {
             if (sumOfTime == 0) {
                 timerTask!!.cancel()
                 timeText.setText("00 : 00 : 00")
+
             }
         }
 
